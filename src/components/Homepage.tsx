@@ -1,16 +1,28 @@
 import React, { FC } from 'react';
 import { View, Button, StyleSheet, Pressable } from 'react-native';
+import { requestLocationPermission } from '../utils/permissions/permissions';
+import { getPlatform } from '../reducers/platform';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { selectPlatform } from '../selectors/platform';
 
 type HomepageProps = {};
 
 
 export const Homepage: FC<HomepageProps> = ({}) => {
+  const dispatch = useAppDispatch()
+  const platform = useAppSelector(selectPlatform)
+  
+  useEffect(() => {
+    dispatch(getPlatform())
+  }, [dispatch])
+  
   return (
     <View>
       <Button
         title='REQUEST PERMISSIONS'
         accessibilityLabel='Request permissions'
-        onPress={() => {console.log("Request permissions pressed")}}
+        onPress={requestLocationPermission}
       />
       <Button
         title='ADD EMERGENCY CONTACTS'

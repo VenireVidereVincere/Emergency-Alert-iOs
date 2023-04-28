@@ -15,9 +15,20 @@
       "**/*"
     ],
     "ios": {
+      "infoPlist":{
+        "NSLocationWhenInUseUsageDescription":"The app includes your location in the Emergency SMS's to help your trusted contacts find you if needed.",
+        "NSContactsUsageDescription":"The app needs you to select who your trusted contacts will be from your contacts list."
+      },
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "READ_CONTACTS",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -26,15 +37,5 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
-  },
-  "permissions": [
-    "CAMERA",
-    "VIEW_CONTACTS",
-    "ACCESS_FINE_LOCATION",
-    "ACCESS_COARSE_LOCATION",
-    "READ_PHONE_STATE",
-    "READ_EXTERNAL_STORAGE",
-    "WRITE_EXTERNAL_STORAGE",
-    "SEND_SMS"
-  ]
+  }
 }

@@ -4,23 +4,15 @@ import { AppNavigator } from './src/routers/router';
 import { store } from './src/store/store';
 import { Provider } from 'react-redux'
 import { Homepage } from './src/components/Homepage';
-import { useAppDispatch, useAppSelector } from './src/hooks/hooks';
-import { getPlatform } from './src/reducers/platform';
-import { useEffect } from 'react';
 
-export default function App() {
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-      dispatch(getPlatform())
-    }, [dispatch])
-    
+
+export default function App() {  
   return (
-    <View style={styles.container}>
-      <Provider store={store}>
-        <Homepage></Homepage>
-      </Provider>
-    </View>
-    
+    <Provider store={store}>
+      <View style={styles.container}>
+          <Homepage></Homepage>
+      </View>
+    </Provider>
   );
 }
 
