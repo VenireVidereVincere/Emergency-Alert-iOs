@@ -1,7 +1,7 @@
-import React from "react";
-import { View } from "react-native/types";
+import React, { FC  } from "react";
+import { View } from "react-native";
 
-export const Countdown: React.FC = () => {
+export const Countdown: FC = () => {
     return (<View>
         
         </View>)

@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import contactReducer from '../reducers/contacts'
+import platformReducer from '../reducers/platform'
 
 export const store = configureStore({
   reducer: {
-    contact: contactReducer
+    contact: contactReducer,
+    platform: platformReducer
   },
 });
 
