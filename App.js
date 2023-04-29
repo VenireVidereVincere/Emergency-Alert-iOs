@@ -4,14 +4,16 @@ import { AppNavigator } from './src/routers/router';
 import { store } from './src/store/store';
 import { Provider } from 'react-redux'
 import { Homepage } from './src/components/Homepage';
-
+import { RootSiblingParent } from 'react-native-root-siblings'
 
 export default function App() {  
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-          <Homepage></Homepage>
-      </View>
+      <RootSiblingParent>
+        <View style={styles.container}>
+            <Homepage></Homepage>
+        </View>
+      </RootSiblingParent>
     </Provider>
   );
 }

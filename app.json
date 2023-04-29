@@ -6,6 +6,20 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins":[
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission":"The app includes your location in the Emergency SMS's to help your trusted contacts find you if needed."
+        }
+      ],
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "The app needs you to select who your trusted contacts will be from your contacts list."
+        }
+      ]
+    ],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -15,10 +29,6 @@
       "**/*"
     ],
     "ios": {
-      "infoPlist":{
-        "NSLocationWhenInUseUsageDescription":"The app includes your location in the Emergency SMS's to help your trusted contacts find you if needed.",
-        "NSContactsUsageDescription":"The app needs you to select who your trusted contacts will be from your contacts list."
-      },
       "supportsTablet": true
     },
     "android": {
