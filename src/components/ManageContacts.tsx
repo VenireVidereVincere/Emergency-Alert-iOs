@@ -1,8 +1,10 @@
-import React, { FC } from "react";
+import React from "react";
 import { View } from "react-native";
 
-export const ManageContacts: FC = () => {
-    return (<View>
-        
-        </View>)
+export const ManageContacts = function () {
+    return (
+        <View>
+
+        </View>
+    )
 }

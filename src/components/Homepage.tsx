@@ -5,13 +5,15 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { requestPermissions } from '../utils/permissions'
 import { fetchContacts } from '../utils/contacts';
+import { useNavigation } from '@react-navigation/native';
 
-type HomepageProps = {};
+type HomepageProps = any;
 
 
-export const Homepage: FC<HomepageProps> = ({}) => {
+export const Homepage: FC<HomepageProps> = ({ navigation }) => {
   // dispatch hook
   const dispatch = useAppDispatch()
+  // navigation hook
   
   useEffect(() => {
     dispatch(getPlatform())
@@ -27,12 +29,12 @@ export const Homepage: FC<HomepageProps> = ({}) => {
       <Button
         title='ADD EMERGENCY CONTACTS'
         accessibilityLabel='Add emergency contacts'
-        onPress={fetchContacts}
+        onPress={() => navigation.navigate('ListContacts')}
       />
       <Button
         title='MANAGE EMERGENCY CONTACTS'
         accessibilityLabel='Manage emergency contacts'
-        onPress={() => {console.log("Manage contacts pressed")}}
+        onPress={() => navigation.navigate('ManageContacts')}
       />
       <Button
         title='EMERGENCY'
