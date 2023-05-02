@@ -5,29 +5,52 @@ import type { Contact as ExpoContact } from 'expo-contacts'
 interface ContactsState {
   contacts: Contact[],
   emergencyContacts: Contact[];
+  errorMessage?: string | null;
+  toastMessage?: string | null;
 }
 
 const initialState: ContactsState = {
   contacts: [],
-  emergencyContacts: []
+  emergencyContacts: [],
+  errorMessage: null,
+  toastMessage: null,
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
+    // Handles adding all contacts retrieved from address book to state in order to then render in FlatList in order for the user to select an Emergency Contact 
     addAllContacts: (state, action: PayloadAction<ExpoContact[]>) => {
       state.contacts = action.payload
     },
+    // Handles clearing all contacts from addAllContacts to reduce memory usage, gets called only once the FlatList component dismounts.
     removeAllContacts: (state) => {
       state.contacts = []
     },
+    // Handles adding a single contact selected from the FlatList into the state, which will be stored on a file for perm storage
     addEmergencyContact: (state, action: PayloadAction<Contact>) => {
-      state.emergencyContacts.push(action.payload);
+      // Check for duplicates
+      if (state.emergencyContacts.some(contact => {
+        return contact.id === action.payload.id;
+      })) {
+        // If it's duplicate
+        state.errorMessage = "The selected contact is already an Emergency Contact";
+        state.toastMessage = state.errorMessage;
+      } else {
+        // If it's not duplicate
+        state.emergencyContacts.push(action.payload);
+        state.toastMessage = "Contact added successfully";
+      }
     },
+    // Handles removing a single contact selected from the current list of Emergency Contacts Flat List in the Manage Contacts component.
     removeEmergencyContact: (state, action: PayloadAction<Contact>) => {
       state.emergencyContacts = state.emergencyContacts.filter(contact => contact.id !== action.payload.id);
     },
+    //Reducer to handle showing or not showing the "Select contact" button in the FlatList from addAllContacts,
+    toggleIsSelected: (state, action: PayloadAction<Boolean>) => {
+      
+    }
   },
 });
 

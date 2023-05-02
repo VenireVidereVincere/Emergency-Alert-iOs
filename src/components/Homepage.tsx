@@ -34,7 +34,7 @@ export const Homepage: FC<HomepageProps> = ({ navigation }) => {
       <Button
         title='MANAGE EMERGENCY CONTACTS'
         accessibilityLabel='Manage emergency contacts'
-        onPress={() => navigation.navigate('ManageContacts')}
+        onPress={() => navigation.navigate('ManageEmergencyContacts')}
       />
       <Button
         title='EMERGENCY'

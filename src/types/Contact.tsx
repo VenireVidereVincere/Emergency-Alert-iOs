@@ -1,5 +1,6 @@
 export interface Contact {
     id: string,
     name: string,
-    phoneNumber?: string
+    phoneNumber?: any[],
+    personalizedMessage?: string
 }

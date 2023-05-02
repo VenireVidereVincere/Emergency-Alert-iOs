@@ -10,7 +10,6 @@ export const fetchContacts = async function (): Promise<Contacts.Contact[] | und
                 Contacts.Fields.PhoneNumbers
             ]
         })
-        console.log(data)
         return data
     } else {
         Toast.show('Contacts permission was denied!', {
