@@ -47,6 +47,14 @@ const contactsSlice = createSlice({
     removeEmergencyContact: (state, action: PayloadAction<Contact>) => {
       state.emergencyContacts = state.emergencyContacts.filter(contact => contact.id !== action.payload.id);
     },
+    modifyEmergencyContact: (state, action: PayloadAction<{ index: number, personalizedMessage: string }>) => {
+      const { index, personalizedMessage } = action.payload;
+        const updatedContact = {
+          ...state.emergencyContacts[index],
+          personalizedMessage
+        };
+        state.emergencyContacts[index] = updatedContact;
+      },
     //Reducer to handle showing or not showing the "Select contact" button in the FlatList from addAllContacts,
     toggleIsSelected: (state, action: PayloadAction<Boolean>) => {
       
@@ -54,6 +62,6 @@ const contactsSlice = createSlice({
   },
 });
 
-export const { addEmergencyContact, removeEmergencyContact, addAllContacts, removeAllContacts } = contactsSlice.actions;
+export const { addEmergencyContact, removeEmergencyContact, addAllContacts, removeAllContacts, modifyEmergencyContact } = contactsSlice.actions;
 
 export default contactsSlice.reducer;

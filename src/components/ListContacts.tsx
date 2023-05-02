@@ -40,6 +40,7 @@ export const ListContacts: React.FC<ListContactProps> = ({navigation}) => {
         Toast.show(toastMessage!!, {
           duration: Toast.durations.LONG
         })
+        dispatch(changeSelectedContact({selectedContact: -1}))
         navigation.navigate('Homepage')
       }
     }
