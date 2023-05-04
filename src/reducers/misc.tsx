@@ -26,10 +26,13 @@ const miscSlice = createSlice({
         },
         setMissingPermissionsError: (state, action:PayloadAction<missingPermissionsError>) => {
             state.missingPermissionsError = action.payload.missingPermissionsError
-        }   
+        },
+        deleteMissingPermissionsError: (state) => {
+            state.missingPermissionsError = undefined
+        }
     }
 })
 
-export const { changeSelectedContact } = miscSlice.actions;
+export const { changeSelectedContact, setMissingPermissionsError, deleteMissingPermissionsError } = miscSlice.actions;
 
 export default miscSlice.reducer;

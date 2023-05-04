@@ -15,6 +15,7 @@ export const AppNavigator = () => {
         <Stack.Screen name="ListContacts" component={ListContacts} />
         <Stack.Screen name="ManageEmergencyContacts" component={ManageEmergencyContacts} />
         <Stack.Screen name="ModifyEmergencyContact" component={ModifyEmergencyContact as any} />
+        <Stack.Screen name="Countdown" component={Countdown} />
       </Stack.Navigator>
     </NavigationContainer>
   );

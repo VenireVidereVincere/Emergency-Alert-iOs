@@ -41,7 +41,6 @@ const contactsSlice = createSlice({
         // If it's not duplicate
         
         state.emergencyContacts = [...state.emergencyContacts, action.payload]
-        console.log(state.emergencyContacts)
         state.toastMessage = "Contact added successfully";
         state.errorMessage = undefined
       }

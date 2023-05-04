@@ -15,13 +15,11 @@ type ModifyEmergencyContactProps = {
 
 export const ModifyEmergencyContact: FC<ModifyEmergencyContactProps> = ({ navigation, route }) => {
     const dispatch = useAppDispatch()
-    console.log(route.params)
     const contact = route.params.contact
     const emergencyContacts = useAppSelector((state) => state.contact.emergencyContacts)
     const contactIndex = emergencyContacts.findIndex((c) => c.id === contact.id);
-    console.log(contactIndex)
-    console.log(contact)
-    
+    const emergencyMessage = emergencyContacts[contactIndex].personalizedMessage;
+
     const handlePersonalizedMessageChange = (text: string) => {
         dispatch(modifyEmergencyContact({
             index: contactIndex,
@@ -48,7 +46,7 @@ export const ModifyEmergencyContact: FC<ModifyEmergencyContactProps> = ({ naviga
             <Text>{contact.name}</Text>
             <Text>{contact.phoneNumbers!![0].number}</Text>
             <TextInput
-                value={contact.personalizedMessage}
+                value={emergencyMessage}
                 onChangeText={(text) => {handlePersonalizedMessageChange(text)}}            
                 
             />
