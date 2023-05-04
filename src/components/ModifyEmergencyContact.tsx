@@ -15,41 +15,42 @@ type ModifyEmergencyContactProps = {
 
 export const ModifyEmergencyContact: FC<ModifyEmergencyContactProps> = ({ navigation, route }) => {
     const dispatch = useAppDispatch()
-    const { contact } = route.params
+    console.log(route.params)
+    const contact = route.params.contact
     const emergencyContacts = useAppSelector((state) => state.contact.emergencyContacts)
-    const contactIndex = emergencyContacts.findIndex(item => item.id === contact.id)
-
-    const [personalizedMessage, setPersonalizedMessage] = React.useState(contact.personalizedMessage)
-
+    const contactIndex = emergencyContacts.findIndex((c) => c.id === contact.id);
+    console.log(contactIndex)
+    console.log(contact)
+    
     const handlePersonalizedMessageChange = (text: string) => {
-        setPersonalizedMessage(text)
+        dispatch(modifyEmergencyContact({
+            index: contactIndex,
+            personalizedMessage: text
+        }))
     }
-
+    
     const handleCancelPress = () => {
         dispatch(modifyEmergencyContact({
             index: contactIndex,
             personalizedMessage: contact.personalizedMessage!!
         }))
-        Toast.show("Cancelled", {
-            duration: Toast.durations.LONG
-        })
+        Toast.show('Cancelled')
         navigation.navigate('ManageEmergencyContacts')
     }
 
     const handleConfirmPress = () => {
-        Toast.show("Change successful", {
-            duration: Toast.durations.LONG
-        })
+        Toast.show('Change successful!')
         navigation.navigate('ManageEmergencyContacts')
     }
 
     return (
         <View>
             <Text>{contact.name}</Text>
-            <Text>{contact.phoneNumber!![0].number}</Text>
+            <Text>{contact.phoneNumbers!![0].number}</Text>
             <TextInput
-                value={personalizedMessage}
-                onChangeText={handlePersonalizedMessageChange}
+                value={contact.personalizedMessage}
+                onChangeText={(text) => {handlePersonalizedMessageChange(text)}}            
+                
             />
             <Button title="Cancel" onPress={handleCancelPress} />
             <Button title="Confirm" onPress={handleConfirmPress} />

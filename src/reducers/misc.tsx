@@ -4,9 +4,16 @@ interface selectedContactType {
     selectedContact: number
 }
 
-const initialState: selectedContactType = {
-    selectedContact: -1
+interface missingPermissionsError {
+    missingPermissionsError: string | undefined
 }
+
+interface InitialState extends selectedContactType, missingPermissionsError {}
+
+const initialState: InitialState = {
+  selectedContact: -1,
+  missingPermissionsError: undefined
+};
 
 const miscSlice = createSlice({
     name: 'misc',
@@ -16,7 +23,10 @@ const miscSlice = createSlice({
         // It's a simple toggle to render/not render the button to select the contact.
         changeSelectedContact: (state, action: PayloadAction<selectedContactType>) => {
             state.selectedContact = action.payload.selectedContact
-        }
+        },
+        setMissingPermissionsError: (state, action:PayloadAction<missingPermissionsError>) => {
+            state.missingPermissionsError = action.payload.missingPermissionsError
+        }   
     }
 })
 

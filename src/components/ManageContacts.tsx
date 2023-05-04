@@ -9,7 +9,7 @@ import { removeEmergencyContact } from "../reducers/contacts";
 import Toast from "react-native-root-toast";
 
 type ManageEmergencyContactsProps = {
-    navigation: StackNavigationProp<RootStackParamList, 'ModifyEmergencyContact'>;
+    navigation: StackNavigationProp<RootStackParamList, 'ManageEmergencyContacts'>;
 }
 
 export const ManageEmergencyContacts: FC<ManageEmergencyContactsProps> = function ({navigation}) {
@@ -36,8 +36,10 @@ export const ManageEmergencyContacts: FC<ManageEmergencyContactsProps> = functio
     const renderItem = ({ item }: { item: Contact}) => (
         <View>
             <TouchableWithoutFeedback onPress={() => onPressContact(item.id)}>
-                <Text>{item.name}</Text>
-                <Text>{item.phoneNumber ? item.phoneNumber[0].number : undefined}</Text>
+                <View>
+                    <Text>{item.name}</Text>
+                    <Text>{item.phoneNumbers ? item.phoneNumbers[0].number : undefined}</Text>
+                </View>
             </TouchableWithoutFeedback>
             {selectedContact === Number(item.id) &&
                 <>

@@ -15,43 +15,29 @@ export const ListContacts: React.FC<ListContactProps> = ({navigation}) => {
   const dispatch = useAppDispatch();
   const contacts = useAppSelector((state) => state.contact.contacts);
   const selectedContact = useAppSelector((state) => state.misc.selectedContact)
-
+  const toastMessage = useAppSelector((state) => state.contact.toastMessage); // add this
+  const errorMessage = useAppSelector((state)=> state.contact.errorMessage)
   useEffect(() => {
     const getContacts = async () => {
       const data = await fetchContacts();
-      if (data) {
-        dispatch(addAllContacts(data));
-      }
+      dispatch(addAllContacts(data || []))
     };
     getContacts();
   }, [dispatch]);
 
-  useEffect(() => {
-    // If there's an error message that means the user tried to add a repeated emergency contact.
-    const errorMessage = useAppSelector((state: RootState) => state.contact.errorMessage)
-    if (errorMessage){
-      Toast.show(errorMessage, {
-        duration: Toast.durations.LONG
-      })
-    } else {
-      const toastMessage = useAppSelector((state: RootState) => state.contact.toastMessage)
-      // If a success message has been set, display success message and navigate back to homepage
-      if (toastMessage) {
-        Toast.show(toastMessage!!, {
-          duration: Toast.durations.LONG
-        })
-        dispatch(changeSelectedContact({selectedContact: -1}))
-        navigation.navigate('Homepage')
-      }
-    }
-  },[useAppSelector((state: RootState) => state.contact.errorMessage), useAppSelector((state: RootState) => state.contact.toastMessage)])
 
-// Handles the user pressing 'select contact' under a specific contact
+  // Handles the user pressing 'select contact' under a specific contact
   const onSelectContact = (contact: Contact): void => {
     dispatch(addEmergencyContact(contact))
+    Toast.show(toastMessage!!, {
+      duration: Toast.durations.LONG })
+      if (!errorMessage) {
+        dispatch(changeSelectedContact({selectedContact: -1}))
+    }
+  
   }
 
-// Handles the user pressing a contact from the FlatList 
+  // Handles the user pressing a contact from the FlatList 
   const onPressContact = (id: number): void => {
     dispatch(changeSelectedContact({selectedContact: id}))
   } 

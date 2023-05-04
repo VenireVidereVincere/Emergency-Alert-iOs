@@ -39,8 +39,11 @@ const contactsSlice = createSlice({
         state.toastMessage = state.errorMessage;
       } else {
         // If it's not duplicate
-        state.emergencyContacts.push(action.payload);
+        
+        state.emergencyContacts = [...state.emergencyContacts, action.payload]
+        console.log(state.emergencyContacts)
         state.toastMessage = "Contact added successfully";
+        state.errorMessage = undefined
       }
     },
     // Handles removing a single contact selected from the current list of Emergency Contacts Flat List in the Manage Contacts component.

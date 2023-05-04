@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-import { View, Button, StyleSheet, Pressable } from 'react-native';
+import { View, Button} from 'react-native';
 import { getPlatform } from '../reducers/platform';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch } from '../hooks/hooks';
 import { requestPermissions } from '../utils/permissions'
-import { fetchContacts } from '../utils/contacts';
-import { useNavigation } from '@react-navigation/native';
 
 type HomepageProps = any;
 
@@ -15,10 +13,12 @@ export const Homepage: FC<HomepageProps> = ({ navigation }) => {
   const dispatch = useAppDispatch()
   // navigation hook
   
+  // The platform gets loaded into state when the app is launched and the main component loaded so other components can use it later. 
   useEffect(() => {
     dispatch(getPlatform())
   }, [dispatch])
   
+
   return (
     <View>
       <Button
