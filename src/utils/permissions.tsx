@@ -1,6 +1,5 @@
 import * as Contacts from 'expo-contacts'
 import * as Location from 'expo-location'
-import Toast from 'react-native-root-toast';
 
 export const requestPermissions = async function (): Promise<Boolean> {
 

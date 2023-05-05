@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks/hooks';
 import { fetchContacts } from '../utils/contacts';
-import { addAllContacts, addEmergencyContact } from '../reducers/contacts';
+import { addAllContacts } from '../reducers/contacts';
+import { addEmergencyContact } from '../reducers/emergencyContacts';
 import { FlatList, Text, View } from 'react-native';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { changeSelectedContact } from '../reducers/misc';
@@ -19,8 +20,8 @@ export const ListContacts: React.FC<ListContactProps> = ({navigation}) => {
   const dispatch = useAppDispatch();
   const contacts = useAppSelector((state) => state.contact.contacts);
   const selectedContact = useAppSelector((state) => state.misc.selectedContact)
-  const toastMessage = useAppSelector((state) => state.contact.toastMessage); // add this
-  const errorMessage = useAppSelector((state)=> state.contact.errorMessage)
+  const toastMessage = useAppSelector((state) => state.emergencyContacts.toastMessage); // add this
+  const errorMessage = useAppSelector((state)=> state.emergencyContacts.errorMessage)
   useEffect(() => {
     const getContacts = async () => {
       const data = await fetchContacts();

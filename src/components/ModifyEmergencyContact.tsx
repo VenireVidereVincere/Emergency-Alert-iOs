@@ -5,7 +5,7 @@ import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../types/RootStack'
 import { TextInput } from 'react-native-gesture-handler'
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
-import { modifyEmergencyContact } from '../reducers/contacts'
+import { modifyEmergencyContact } from '../reducers/emergencyContacts'
 import Toast from 'react-native-root-toast'
 
 type ModifyEmergencyContactProps = {
@@ -16,7 +16,7 @@ type ModifyEmergencyContactProps = {
 export const ModifyEmergencyContact: FC<ModifyEmergencyContactProps> = ({ navigation, route }) => {
     const dispatch = useAppDispatch()
     const contact = route.params.contact
-    const emergencyContacts = useAppSelector((state) => state.contact.emergencyContacts)
+    const emergencyContacts = useAppSelector((state) => state.emergencyContacts.emergencyContacts)
     const contactIndex = emergencyContacts.findIndex((c) => c.id === contact.id);
     const emergencyMessage = emergencyContacts[contactIndex].personalizedMessage;
 

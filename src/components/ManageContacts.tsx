@@ -5,7 +5,7 @@ import { Contact } from '../types/Contact'
 import { changeSelectedContact } from "../reducers/misc";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from "../types/RootStack";
-import { removeEmergencyContact } from "../reducers/contacts";
+import { removeEmergencyContact } from "../reducers/emergencyContacts";
 import Toast from "react-native-root-toast";
 
 type ManageEmergencyContactsProps = {
@@ -14,7 +14,7 @@ type ManageEmergencyContactsProps = {
 
 export const ManageEmergencyContacts: FC<ManageEmergencyContactsProps> = function ({navigation}) {
     
-    const contacts = useAppSelector((state) => state.contact.emergencyContacts)
+    const contacts = useAppSelector((state) => state.emergencyContacts.emergencyContacts)
     const selectedContact = useAppSelector((state) => state.misc.selectedContact)
     const dispatch = useAppDispatch()
 

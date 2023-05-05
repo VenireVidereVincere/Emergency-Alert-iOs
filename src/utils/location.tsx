@@ -1,7 +1,7 @@
 import * as Location from 'expo-location';
 import Toast from 'react-native-root-toast';
 import type { LocationType } from '../types/Location';
-import { addLocation } from '../reducers/location';
+import { setLocation } from '../reducers/location';
 import { useAppDispatch } from '../hooks/hooks';
 
 // Checks if the location services are on. In case they're not, prompts the user to turn them on.
@@ -38,5 +38,5 @@ const fetchCurrentLocation = async function (): Promise<void> {
         longitude: locationObject.coords.longitude
     }
 
-    dispatch(addLocation(location))
+    dispatch(setLocation(location))
 };
