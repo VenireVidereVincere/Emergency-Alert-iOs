@@ -11,7 +11,7 @@ export const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Homepage} />
+        <Stack.Screen name="Homepage" component={Homepage} />
         <Stack.Screen name="ListContacts" component={ListContacts} />
         <Stack.Screen name="ManageEmergencyContacts" component={ManageEmergencyContacts} />
         <Stack.Screen name="ModifyEmergencyContact" component={ModifyEmergencyContact as any} />

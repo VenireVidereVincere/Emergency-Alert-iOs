@@ -10,13 +10,13 @@ const locationSlice = createSlice({
   name: 'location',
   initialState,
   reducers: {
-    addLocation: (state, action: PayloadAction<LocationType>) => {
+    setLocation: (state, action: PayloadAction<LocationType>) => {
       state.latitude = action.payload.latitude;
       state.longitude = action.payload.longitude;
     }
   }
 })
 
-export const { addLocation } = locationSlice.actions
+export const { setLocation } = locationSlice.actions
 
 export default locationSlice.reducer

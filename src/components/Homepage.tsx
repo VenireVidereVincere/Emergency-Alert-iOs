@@ -6,8 +6,12 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { requestPermissions } from '../utils/permissions'
 import Toast from 'react-native-root-toast';
 import { setMissingPermissionsError, deleteMissingPermissionsError } from '../reducers/misc';
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../types/RootStack'
 
-type HomepageProps = any;
+type HomepageProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'Homepage'>
+};
 
 
 export const Homepage: FC<HomepageProps> = ({ navigation }) => {

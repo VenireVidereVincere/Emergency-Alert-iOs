@@ -8,8 +8,12 @@ import { changeSelectedContact } from '../reducers/misc';
 import type { Contact } from '../types/Contact'
 import Toast from 'react-native-root-toast';
 import { RootState } from '../store/store';
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../types/RootStack'
 
-type ListContactProps = any
+type ListContactProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'ListContacts'>
+}
 
 export const ListContacts: React.FC<ListContactProps> = ({navigation}) => {
   const dispatch = useAppDispatch();
