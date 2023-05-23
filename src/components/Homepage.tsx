@@ -8,6 +8,7 @@ import Toast from 'react-native-root-toast';
 import { setMissingPermissionsError, deleteMissingPermissionsError } from '../reducers/misc';
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../types/RootStack'
+import { checkLocationServicesAndGetLocation } from '../utils/location';
 
 type HomepageProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Homepage'>
@@ -74,6 +75,9 @@ export const Homepage: FC<HomepageProps> = ({ navigation }) => {
           if(missingPermissionsError){
             Toast.show(missingPermissionsError!!)
           } else {
+            if(!checkLocationServicesAndGetLocation(dispatch)){
+              return
+            }
             navigation.navigate('Countdown')
           }
         }}

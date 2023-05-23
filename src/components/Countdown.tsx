@@ -7,7 +7,8 @@ import { setIsCountdownCancelled, reduceCurrentCountByOne, resetCurrentCount, se
 import Toast from "react-native-root-toast";
 import { useStore } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
-import { BackHandler } from "react-native/Libraries/Utilities/BackHandler";
+import { BackHandler } from "react-native";
+import { sendSMS } from "../utils/messages";
 
 interface CountdownProps {
     navigation: StackNavigationProp<RootStackParamList, 'Countdown'>;
@@ -18,6 +19,8 @@ export const Countdown: FC<CountdownProps> = ({navigation}) => {
     const dispatch = useAppDispatch()
     const contacts = useAppSelector((state) => state.emergencyContacts.emergencyContacts)
     const currentCount = useAppSelector((state) => state.countdown.currentCount)
+    const latitude = useAppSelector((state) => state.location.latitude)
+    const longitude = useAppSelector((state) => state.location.longitude)
 
     const handleCancelledCountdown = () => {
         Toast.show('Cancelled!')
@@ -25,10 +28,15 @@ export const Countdown: FC<CountdownProps> = ({navigation}) => {
     }
 
     const handleFinishedCountdown = () => {
-        // TODO
-        // HTTP request to server with contacts object to have SMS's sent 
-        // to each contact
-        // then redirect the user back to the homepage component
+      const mapsLink = `https://www.google.com/maps/search/?api=1&query=${latitude}%2C${longitude}`
+      // TODO - Check SMS's being sent out.
+        contacts.forEach((contact) => {
+          contact.phoneNumbers!!.forEach((item) => {
+            if(item.number){
+              sendSMS(contact.personalizedMessage!!, item.number.replace(/\s/g, ""), mapsLink)
+            }
+          })
+        })
         Toast.show("FINISHED!")
         navigation.navigate('Homepage')
     }
